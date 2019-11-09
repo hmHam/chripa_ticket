@@ -20,14 +20,8 @@ class InviteViewSet(ModelViewSet):
 
     def create(self, request):
         serializer = self.get_serializer(data=request.data)
-        try:
-            serializer.is_valid(raise_exception=True)
-            self.perform_create(serializer)
-        except ValidationError as e:
-            print(e.args)
-            print(serializer.errors)
-            print(serializer.validated_data)
-            raise e
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
         return FileResponse(
             serializer.context['qrcode'],
             as_attachment=True,

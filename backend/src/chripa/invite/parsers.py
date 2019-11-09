@@ -18,7 +18,6 @@ class LogParser(JSONParser):
         if 'info' not in data:
             raise ValidationError('送信データが不正です')
         data['info'] = self.decrypt_qrinfo(data['info'])
-        print(data)
         return data
 
     @staticmethod
